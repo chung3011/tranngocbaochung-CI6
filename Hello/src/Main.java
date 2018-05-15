@@ -129,9 +129,13 @@ public class Main {
         }
 //        boolean loop=true;
         while (true) {
-            String p = list[x][y];
-            String e1 = list[x1][y1];
-            String e2 = list[x2][y2];
+            int xc=x;
+            int yc=y;
+            int x1c=x1;
+            int y1c=y1;
+            int x2c=x2;
+            int y2c=y2;
+
             for (i = 0; i < 4; i++) {
                 for (j = 0; j < 4; j++) {
                     if (i == x && j == y)
@@ -149,12 +153,31 @@ public class Main {
                 }
                 System.out.println();
             }
-            int xc=x;
-            int yc=y;
-            int x1c=x1;
-            int y1c=y1;
-            int x2c=x2;
-            int y2c=y2;
+            if ((x==x1c && y==y1c) && (xc==x1 && yc==y1))
+            {
+                System.out.println("lose");
+                break;
+            }
+            if ((x==x2c && y==y2c) && (xc==x2 && yc==y2))
+            {
+                System.out.println("lose");
+                break;
+            }
+            if (x==x1 && y==y1)
+            {
+                System.out.println("lose");
+                break;
+            }
+            if (x==x2 && y==y2)
+            {
+                System.out.println("lose");
+                break;
+            }
+            if (x==xg && y==yg)
+            {
+                System.out.println("Win");
+                break;
+            }
             Scanner scanner = new Scanner(System.in);
             String input = scanner.next();
             switch (input) {
@@ -218,31 +241,7 @@ public class Main {
                 x2=x2+1;
             else
                 x2=0;
-            if ((x==x1c && y==y1c) && (xc==x1 && yc==y1))
-            {
-                System.out.println("lose");
-                break;
-            }
-            if ((x==x2c && y==y2c) && (xc==x2 && yc==y2))
-            {
-                System.out.println("lose");
-                break;
-            }
-            if (x==x1 && y==y1)
-            {
-                System.out.println("lose");
-                break;
-            }
-            if (x==x2 && y==y2)
-            {
-                System.out.println("lose");
-                break;
-            }
-            if (x==xg && y==yg)
-            {
-                System.out.println("Win");
-                break;
-            }
+
         }
     }
 }
