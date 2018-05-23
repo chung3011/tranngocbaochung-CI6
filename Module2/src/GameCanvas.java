@@ -4,20 +4,43 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 public class GameCanvas extends JPanel {
 
-    BufferedImage starImage;
-    public int positionXStar=1000;
-    public int positionYStar=400;
-    BufferedImage enemyImage;
-    public int positionXEnemy=100;
-    public int positionYEnemy=500;
     BufferedImage playerImage;
     public int positionXPlayer=512;
     public int positionYPlayer=300;
 
+    BufferedImage starImage;
+//    public int positionXStar=600;
+//    public int positionYStar=400;
+    public Point[] starsList = new Point[100];
+    BufferedImage enemyImage;
+//    public int positionXEnemy=100;
+//    public int positionYEnemy=500;
+    public Point[] enemiesList = new Point[100];
+
+
     public GameCanvas() {
+
+        Random rand = new Random();
+        for (int i = 0; i < this.enemiesList.length; i++){
+            while (true){
+                int positionXEnemy = rand.nextInt(1024);
+                int positionYEnemy = rand.nextInt(600);
+                if (positionXEnemy!=512 && positionYEnemy!=300)
+                    this.enemiesList[i] = new Point(positionXEnemy,positionYEnemy);
+                    break;
+            }
+        }
+
+        for(int i = 0; i< this.starsList.length; i++){
+            int positionXStar = rand.nextInt(1024);
+            int positionYStar = rand.nextInt(600);
+            this.starsList[i] = new Point(positionXStar,positionYStar);
+        }
+
         this.setSize(1024, 600);
 
         //load image
@@ -36,8 +59,14 @@ public class GameCanvas extends JPanel {
 
         g.setColor(Color.BLACK);
         g.fillRect(0,0,1024,600);
-        g.drawImage(this.starImage,this.positionXStar,this.positionYStar,10,10,null);
-        g.drawImage(this.enemyImage,this.positionXEnemy,this.positionYEnemy,20,20,null);
-        g.drawImage(this.playerImage,this.positionXPlayer,this.positionYPlayer,50,50,null);
+//        g.drawImage(this.starImage,this.positionXStar,this.positionYStar,10,10,null);
+//        g.drawImage(this.enemyImage,this.positionXEnemy,this.positionYEnemy,20,20,null);
+        g.drawImage(this.playerImage,this.positionXPlayer,this.positionYPlayer,20,20,null);
+        for (int i = 0; i <this.enemiesList.length; i++){
+            g.drawImage(this.enemyImage, this.enemiesList[i].x, this.enemiesList[i].y,10,10,null);
+        }
+        for (int i = 0; i <this.starsList.length; i++){
+            g.drawImage(this.starImage, this.starsList[i].x,this.starsList[i].y, 5, 5, null);
+        }
     }
 }
