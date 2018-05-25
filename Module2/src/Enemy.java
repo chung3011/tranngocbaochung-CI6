@@ -2,6 +2,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+import static java.lang.Math.abs;
+
 public class Enemy {
     public BufferedImage image;
     public int x, y;
@@ -28,17 +30,17 @@ public class Enemy {
         }
         else if(positionXPlayer == this.x){
             this.velocityX =0;
-            this.velocityY = (positionYPlayer - this.y)/Math.abs(positionYPlayer - this.y) *(rand.nextInt(2) +2);
+            this.velocityY = (positionYPlayer - this.y)/Math.abs(positionYPlayer - this.y);
         }
         else if(positionYPlayer == this.y){
             this.velocityY =0;
-            this.velocityX = (positionXPlayer - this.x)/Math.abs(positionXPlayer - this.x) *(rand.nextInt(2) +2);
+            this.velocityX = (positionXPlayer - this.x)/Math.abs(positionXPlayer - this.x) ;
         }
         else{
-            this.velocityX = (positionXPlayer - this.x)/Math.abs(positionXPlayer - this.x) *(rand.nextInt(2) +2);
-            this.velocityY = (positionYPlayer - this.y)/Math.abs(positionYPlayer - this.y) *(rand.nextInt(2) +2);
+            this.velocityX = (positionXPlayer - this.x)/Math.abs(positionXPlayer - this.x) ;
+            this.velocityY = (positionYPlayer - this.y)/Math.abs(positionYPlayer - this.y) ;
         }
-    }
+        }
 
     public void run(int windowWidth, int windowHeight,int positionXPlayer, int positionYPlayer) {
         boolean outX = false, outY = false;
