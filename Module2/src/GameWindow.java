@@ -35,23 +35,27 @@ public class GameWindow extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                    if (gameCanvas.positionXPlayer > 0)
-                        gameCanvas.positionXPlayer = (gameCanvas.positionXPlayer - 10) % 1024;
-                    else
-                        gameCanvas.positionXPlayer = 1024;
+//                    if (gameCanvas.positionXPlayer > 0)
+//                        gameCanvas.positionXPlayer = (gameCanvas.positionXPlayer - 10) % 1024;
+//                    else
+//                        gameCanvas.positionXPlayer = 1024;
+                    gameCanvas.player.run("left",1024,600);
                 }
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                    gameCanvas.positionXPlayer = (gameCanvas.positionXPlayer + 10) % 1024;
+//                    gameCanvas.positionXPlayer = (gameCanvas.positionXPlayer + 10) % 1024;
+                    gameCanvas.player.run("right",1024,60);
                 }
-                if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    if (gameCanvas.positionYPlayer > 0)
-                        gameCanvas.positionYPlayer = (gameCanvas.positionYPlayer - 10) % 600;
-                    else
-                        gameCanvas.positionYPlayer = 600;
-                }
-                if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    gameCanvas.positionYPlayer = (gameCanvas.positionYPlayer + 10) % 600;
-                }
+//                if (e.getKeyCode() == KeyEvent.VK_UP) {
+////                    if (gameCanvas.positionYPlayer > 0)
+////                        gameCanvas.positionYPlayer = (gameCanvas.positionYPlayer - 10) % 600;
+////                    else
+////                        gameCanvas.positionYPlayer = 600;
+//                    gameCanvas.player.run("up",1024,600);
+//                }
+//                if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+////                    gameCanvas.positionYPlayer = (gameCanvas.positionYPlayer + 10) % 600;
+//                    gameCanvas.player.run("down",1024,600);
+//                }
             }
 
             @Override
