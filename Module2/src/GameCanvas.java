@@ -132,7 +132,7 @@ public class GameCanvas extends JPanel {
     }
 
     private void createStar(){
-            if(this.countStar == 10){
+            if(this.countStar == 8){
                 Star star = new Star(
                         this.loadImage("resources/resources/images/star.png"),
                         1024,
