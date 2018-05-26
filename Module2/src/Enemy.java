@@ -23,22 +23,6 @@ public class Enemy {
         this.velocityY = velocityY;
     }
 
-    public void followPlayer(int positionXPlayer, int positionYPlayer) {
-        if (positionXPlayer == this.x && positionYPlayer == this.y) {
-            this.velocityX = 0;
-            this.velocityY = 0;
-        } else if (positionXPlayer == this.x) {
-            this.velocityX = 0;
-            this.velocityY = (positionYPlayer - this.y) / Math.abs(positionYPlayer - this.y) * (rand.nextInt(5) + 1);
-        } else if (positionYPlayer == this.y) {
-            this.velocityY = 0;
-            this.velocityX = (positionXPlayer - this.x) / Math.abs(positionXPlayer - this.x) * (rand.nextInt(5) + 1);
-        } else {
-            this.velocityX = (positionXPlayer - this.x) / Math.abs(positionXPlayer - this.x) * (rand.nextInt(5) + 1);
-            this.velocityY = (positionYPlayer - this.y) / Math.abs(positionYPlayer - this.y) * (rand.nextInt(5) + 1);
-        }
-    }
-
     public void run(int positionXPlayer, int positionYPlayer) {
         boolean outX = false, outY = false;
         this.followPlayer(positionXPlayer, positionYPlayer);
@@ -68,6 +52,22 @@ public class Enemy {
             this.x = rand.nextInt(1024);
         }
 
+    }
+
+    public void followPlayer(int positionXPlayer, int positionYPlayer) {
+        if (positionXPlayer == this.x && positionYPlayer == this.y) {
+            this.velocityX = 0;
+            this.velocityY = 0;
+        } else if (positionXPlayer == this.x) {
+            this.velocityX = 0;
+            this.velocityY = (positionYPlayer - this.y) / Math.abs(positionYPlayer - this.y) * (rand.nextInt(5) + 1);
+        } else if (positionYPlayer == this.y) {
+            this.velocityY = 0;
+            this.velocityX = (positionXPlayer - this.x) / Math.abs(positionXPlayer - this.x) * (rand.nextInt(5) + 1);
+        } else {
+            this.velocityX = (positionXPlayer - this.x) / Math.abs(positionXPlayer - this.x) * (rand.nextInt(5) + 1);
+            this.velocityY = (positionYPlayer - this.y) / Math.abs(positionYPlayer - this.y) * (rand.nextInt(5) + 1);
+        }
     }
 
 
