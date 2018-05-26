@@ -21,35 +21,35 @@ public class Player {
     }
 
     public void runLeft(){
-        if (this.x >=0)
+        if (this.x >0)
             this.x -= velocityX;
         else{
-            this.x=1024;
-            this.y=rand.nextInt(600);
+            this.x=984;
+            this.y=rand.nextInt(560);
         }
     }
     public void runRight(){
-        if (this.x <=1024)
+        if (this.x <984)
             this.x += velocityX;
         else{
             this.x=0;
-            this.y=rand.nextInt(600);
+            this.y=rand.nextInt(560);
         }
     }
     public void runUp(){
-        if (this.y >=0)
+        if (this.y >0)
             this.y -= velocityY;
         else{
-            this.y=600;
-            this.x=rand.nextInt(1024);
+            this.y=580;
+            this.x=rand.nextInt(984);
         }
     }
     public void runDown(){
-        if (this.y <=600)
+        if (this.y <560)
             this.y += velocityY;
         else{
             this.y=0;
-            this.x=rand.nextInt(1024);
+            this.x=rand.nextInt(984);
         }
     }
     public void render(Graphics graphics){

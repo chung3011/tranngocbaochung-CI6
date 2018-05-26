@@ -71,12 +71,13 @@ public class GameCanvas extends JPanel {
         this.setupStar();
         this.setupEnemy();
         this.player = new Player(loadImage("resources/resources/images/circle.png"),
-                this.random.nextInt(1024),
-                this.random.nextInt(600),
+                this.random.nextInt(984),
+                this.random.nextInt(560),
                 20,
                 20,
                 10,
                 10);
+        this.background= new Background(0,0,1024,600,Color.BLACK);
     }
 
     private void setupStar(){
@@ -98,7 +99,7 @@ public class GameCanvas extends JPanel {
     }
 
     public void renderAll() {
-        this.createBackground();
+        this.background.render(graphics);
         this.stars.forEach(star -> star.render(graphics));
         this.enemies.forEach(enemy -> enemy.render(graphics));
         this.player.render(graphics);
@@ -150,20 +151,25 @@ public class GameCanvas extends JPanel {
 
     }
     private void createEnemy(){
-        int vX=0, vY=0;
-        while(vX==0 && vY==0){
-            vX = this.random.nextInt(10)-5;
-            vY = this.random.nextInt(10)-5;
-        }
-        if(this.countEnemy == 30){
+//        int vX=0, vY=0;
+//        while(vX==0 && vY==0){
+//            vX = this.random.nextInt(10)-5;
+//            vY = this.random.nextInt(10)-5;
+//        }
+        if(this.countEnemy == 80){
+            int signed = this.random.nextInt(2);
+            if (signed==0) signed=-1;
+            else signed=1;
+            int velocityX = signed*(this.random.nextInt(4)+1);
+            int velocityY = signed*(this.random.nextInt(4)+1);
             Enemy enemy = new Enemy(
                     this.loadImage("resources/resources/images/circle.png"),
                     this.random.nextInt(1024),
                     this.random.nextInt(600),
                     10,
                     10,
-                    vX,
-                    vY
+                    velocityX,
+                    velocityY
             );
             this.enemies.add(enemy);
             this.countEnemy = 0;
@@ -171,10 +177,10 @@ public class GameCanvas extends JPanel {
             this.countEnemy+=1;
         }
     }
-    private void createBackground(){
-        Background background = new Background(0,0,1024,600,Color.BLACK);
-        background.render(graphics);
-    }
+//    private void createBackground(){
+//        Background background = new Background(0,0,1024,600,Color.BLACK);
+//        background.render(graphics);
+//    }
 
     private BufferedImage loadImage(String path) {
         try {
