@@ -23,41 +23,38 @@ public class Enemy {
         this.velocityY = velocityY;
     }
 
-    public void followPlayer(int positionXPlayer, int positionYPlayer){
-        if(positionXPlayer == this.x && positionYPlayer ==this.y){
-            this.velocityX =0;
-            this.velocityY =0;
+    public void followPlayer(int positionXPlayer, int positionYPlayer) {
+        if (positionXPlayer == this.x && positionYPlayer == this.y) {
+            this.velocityX = 0;
+            this.velocityY = 0;
+        } else if (positionXPlayer == this.x) {
+            this.velocityX = 0;
+            this.velocityY = (positionYPlayer - this.y) / Math.abs(positionYPlayer - this.y) * (rand.nextInt(5) + 1);
+        } else if (positionYPlayer == this.y) {
+            this.velocityY = 0;
+            this.velocityX = (positionXPlayer - this.x) / Math.abs(positionXPlayer - this.x) * (rand.nextInt(5) + 1);
+        } else {
+            this.velocityX = (positionXPlayer - this.x) / Math.abs(positionXPlayer - this.x) * (rand.nextInt(5) + 1);
+            this.velocityY = (positionYPlayer - this.y) / Math.abs(positionYPlayer - this.y) * (rand.nextInt(5) + 1);
         }
-        else if(positionXPlayer == this.x){
-            this.velocityX =0;
-            this.velocityY = (positionYPlayer - this.y)/Math.abs(positionYPlayer - this.y);
-        }
-        else if(positionYPlayer == this.y){
-            this.velocityY =0;
-            this.velocityX = (positionXPlayer - this.x)/Math.abs(positionXPlayer - this.x) ;
-        }
-        else{
-            this.velocityX = (positionXPlayer - this.x)/Math.abs(positionXPlayer - this.x) ;
-            this.velocityY = (positionYPlayer - this.y)/Math.abs(positionYPlayer - this.y) ;
-        }
-        }
+    }
 
-    public void run(int windowWidth, int windowHeight,int positionXPlayer, int positionYPlayer) {
+    public void run(int positionXPlayer, int positionYPlayer) {
         boolean outX = false, outY = false;
         this.followPlayer(positionXPlayer, positionYPlayer);
 
         if (this.x + this.velocityX <= 0) {
-            this.x = windowWidth;
+            this.x = 1024;
             outX = true;
-        } else if (this.x + this.velocityX >= windowWidth) {
+        } else if (this.x + this.velocityX >= 1024) {
             this.x = 0;
             outX = true;
         }
 
         if (this.y + this.velocityY <= 0) {
-            this.y = windowHeight;
+            this.y = 600;
             outY = true;
-        } else if (this.y + this.velocityY >= windowHeight) {
+        } else if (this.y + this.velocityY >= 600) {
             this.y = 0;
             outY = true;
         }
@@ -66,16 +63,16 @@ public class Enemy {
             this.x += this.velocityX;
             this.y += this.velocityY;
         } else if (outX && !outY) {
-            this.y = rand.nextInt(windowHeight);
+            this.y = rand.nextInt(600);
         } else if (outY && !outX) {
-            this.x = rand.nextInt(windowWidth);
+            this.x = rand.nextInt(1024);
         }
 
     }
 
 
-        public void render(Graphics graphics){
-        graphics.drawImage( this.image, this.x, this.y, this.width, this.height,null);
+    public void render(Graphics graphics) {
+        graphics.drawImage(this.image, this.x, this.y, this.width, this.height, null);
 
     }
 }

@@ -75,6 +75,7 @@ public class GameCanvas extends JPanel {
                 this.random.nextInt(600),
                 20,
                 20,
+                10,
                 10);
     }
 
@@ -127,7 +128,7 @@ public class GameCanvas extends JPanel {
         this.createStar();
         this.stars.forEach(star -> star.run());
         this.createEnemy();
-        this.enemies.forEach(enemy -> enemy.run(1024,600,this.player.x,this.player.y));
+        this.enemies.forEach(enemy -> enemy.run(this.player.x,this.player.y));
     }
 
     private void createStar(){

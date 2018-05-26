@@ -39,11 +39,17 @@ public class GameWindow extends JFrame {
 //                        gameCanvas.positionXPlayer = (gameCanvas.positionXPlayer - 10) % 1024;
 //                    else
 //                        gameCanvas.positionXPlayer = 1024;
-                    gameCanvas.player.run("left",1024,600);
+                    gameCanvas.player.runLeft();
                 }
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 //                    gameCanvas.positionXPlayer = (gameCanvas.positionXPlayer + 10) % 1024;
-                    gameCanvas.player.run("right",1024,60);
+                    gameCanvas.player.runRight();
+                }
+                if (e.getKeyCode() == KeyEvent.VK_UP) {
+                    gameCanvas.player.runUp();
+                }
+                if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                    gameCanvas.player.runDown();
                 }
 //                if (e.getKeyCode() == KeyEvent.VK_UP) {
 ////                    if (gameCanvas.positionYPlayer > 0)
