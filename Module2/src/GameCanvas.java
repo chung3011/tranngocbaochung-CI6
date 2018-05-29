@@ -10,10 +10,10 @@ import java.util.Random;
 
 public class GameCanvas extends JPanel {
 
-    BufferedImage playerImage;
-    BufferedImage starImage;
+//    BufferedImage playerImage;
+//    BufferedImage starImage;
 //    public Point[] starsList = new Point[100];
-    BufferedImage enemyImage;
+//    BufferedImage enemyImage;
 //    public Point[] enemiesList = new Point[100];
     BufferedImage backBuffered;
     Graphics graphics;
@@ -70,13 +70,14 @@ public class GameCanvas extends JPanel {
     private void setupCharacter(){
         this.setupStar();
         this.setupEnemy();
-        this.player = new Player(loadImage("resources/resources/images/circle.png"),
-                this.random.nextInt(984),
-                this.random.nextInt(560),
-                20,
-                20,
-                10,
-                10);
+//        this.player = new Player(loadImage("resources/resources/images/circle.png"),
+////                this.random.nextInt(984),
+////                this.random.nextInt(560),
+////                20,
+////                20,
+////                10,
+////                10);
+        this.player = new Player(300,300);
         this.background= new Background(0,0,1024,600,Color.BLACK);
     }
 
@@ -129,7 +130,8 @@ public class GameCanvas extends JPanel {
         this.createStar();
         this.stars.forEach(star -> star.run());
         this.createEnemy();
-        this.enemies.forEach(enemy -> enemy.run(this.player.x,this.player.y));
+        this.enemies.forEach(enemy -> enemy.followPlayer(this.player.position));
+        this.player.run();
     }
 
     private void createStar(){
@@ -140,8 +142,9 @@ public class GameCanvas extends JPanel {
                         this.random.nextInt(600),
                         5,
                         5,
-                        -this.random.nextInt(3) - 1,
+                        -this.random.nextInt(5)-1,
                         0
+
                 );
                 this.stars.add(star);
                 this.countStar = 0;
@@ -167,9 +170,7 @@ public class GameCanvas extends JPanel {
                     this.random.nextInt(1024),
                     this.random.nextInt(600),
                     10,
-                    10,
-                    velocityX,
-                    velocityY
+                    10
             );
             this.enemies.add(enemy);
             this.countEnemy = 0;

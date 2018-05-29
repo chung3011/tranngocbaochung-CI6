@@ -39,18 +39,24 @@ public class GameWindow extends JFrame {
 //                        gameCanvas.positionXPlayer = (gameCanvas.positionXPlayer - 10) % 1024;
 //                    else
 //                        gameCanvas.positionXPlayer = 1024;
-                    gameCanvas.player.runLeft();
+//                    gameCanvas.player.runLeft();
+//                    gameCanvas.player.velocity.x-=8;
+                    gameCanvas.player.angle = 355;
+
                 }
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 //                    gameCanvas.positionXPlayer = (gameCanvas.positionXPlayer + 10) % 1024;
-                    gameCanvas.player.runRight();
+//                    gameCanvas.player.runRight();
+//                    gameCanvas.player.velocity.x+=8;
+                    gameCanvas.player.angle = 5;
+
                 }
-                if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    gameCanvas.player.runUp();
-                }
-                if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    gameCanvas.player.runDown();
-                }
+//                if (e.getKeyCode() == KeyEvent.VK_UP) {
+//                    gameCanvas.player.runUp();
+//                }
+//                if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+//                    gameCanvas.player.runDown();
+//                }
 //                if (e.getKeyCode() == KeyEvent.VK_UP) {
 ////                    if (gameCanvas.positionYPlayer > 0)
 ////                        gameCanvas.positionYPlayer = (gameCanvas.positionYPlayer - 10) % 600;
@@ -66,6 +72,14 @@ public class GameWindow extends JFrame {
 
             @Override
             public void keyReleased(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                    gameCanvas.player.angle = 0;
+
+                }
+                if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                    gameCanvas.player.angle = 0;
+
+                }
             }
         });
     }
