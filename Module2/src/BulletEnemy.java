@@ -1,14 +1,14 @@
 import java.awt.*;
 
-public class Enemy {
+public class BulletEnemy {
     public Vector2d position;
     public Vector2d velocity;
     private ImageRenderer renderer;
 
-    public Enemy() {
+    public BulletEnemy() {
         this.position = new Vector2d();
         this.velocity = new Vector2d();
-        this.renderer = new ImageRenderer("resources/resources/images/circle.png",20,20);
+        this.renderer = new ImageRenderer("resources/resources/images/circle.png",6,6);
     }
 
     public void run() {
@@ -19,4 +19,3 @@ public class Enemy {
         this.renderer.render(graphics, this.position);
     }
 }
-

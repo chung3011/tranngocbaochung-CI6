@@ -35,50 +35,27 @@ public class GameWindow extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-//                    if (gameCanvas.positionXPlayer > 0)
-//                        gameCanvas.positionXPlayer = (gameCanvas.positionXPlayer - 10) % 1024;
-//                    else
-//                        gameCanvas.positionXPlayer = 1024;
-//                    gameCanvas.player.runLeft();
-//                    gameCanvas.player.velocity.x-=8;
-                    gameCanvas.player.angle = 355;
+                    gameCanvas.player.angle -= 10;
 
                 }
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-//                    gameCanvas.positionXPlayer = (gameCanvas.positionXPlayer + 10) % 1024;
-//                    gameCanvas.player.runRight();
-//                    gameCanvas.player.velocity.x+=8;
-                    gameCanvas.player.angle = 5;
+                    gameCanvas.player.angle += 10;
 
                 }
-//                if (e.getKeyCode() == KeyEvent.VK_UP) {
-//                    gameCanvas.player.runUp();
-//                }
-//                if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-//                    gameCanvas.player.runDown();
-//                }
-//                if (e.getKeyCode() == KeyEvent.VK_UP) {
-////                    if (gameCanvas.positionYPlayer > 0)
-////                        gameCanvas.positionYPlayer = (gameCanvas.positionYPlayer - 10) % 600;
-////                    else
-////                        gameCanvas.positionYPlayer = 600;
-//                    gameCanvas.player.run("up",1024,600);
-//                }
-//                if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-////                    gameCanvas.positionYPlayer = (gameCanvas.positionYPlayer + 10) % 600;
-//                    gameCanvas.player.run("down",1024,600);
-//                }
+                Vector2d rotate = (new Vector2d(4,0).rotate(gameCanvas.player.angle));
+                gameCanvas.player.velocity.set(rotate);
+
+                if(e.getKeyCode()==KeyEvent.VK_UP){
+                    gameCanvas.player.velocity.multiply(2);
+
+                }
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                    gameCanvas.player.angle = 0;
-
-                }
-                if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                    gameCanvas.player.angle = 0;
-
+                if (e.getKeyCode() == KeyEvent.VK_UP) {
+                    Vector2d rotate = (new Vector2d(4, 0)).rotate(gameCanvas.player.angle);
+                    gameCanvas.player.velocity.set(rotate);
                 }
             }
         });
