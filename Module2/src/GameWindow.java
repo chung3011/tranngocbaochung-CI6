@@ -28,35 +28,40 @@ public class GameWindow extends JFrame {
 
     private void keyboardEvent() {
         this.addKeyListener(new KeyListener() {
+            private Vector2d NORMAL = new Vector2d(4,0);
+            private Vector2d HIGH = new Vector2d(8,0);
+
             @Override
             public void keyTyped(KeyEvent e) {
             }
 
             @Override
             public void keyPressed(KeyEvent e) {
+                Vector2d velocity = NORMAL.copy();
                 if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                    gameCanvas.player.angle -= 10;
+                    gameCanvas.player.playerMove.angle -= 10;
 
                 }
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                    gameCanvas.player.angle += 10;
+                    gameCanvas.player.playerMove.angle += 10;
 
                 }
-                Vector2d rotate = (new Vector2d(4,0).rotate(gameCanvas.player.angle));
-                gameCanvas.player.velocity.set(rotate);
-
                 if(e.getKeyCode()==KeyEvent.VK_UP){
-                    gameCanvas.player.velocity.multiply(2);
-
+//                    gameCanvas.player.velocity.multiply(2);
+                    velocity = HIGH.copy();
                 }
+                Vector2d rotate = velocity.rotate(gameCanvas.player.playerMove.angle);
+                gameCanvas.player.playerMove.velocity.set(rotate);
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
+                Vector2d velocity = NORMAL.copy();
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    Vector2d rotate = (new Vector2d(4, 0)).rotate(gameCanvas.player.angle);
-                    gameCanvas.player.velocity.set(rotate);
+                    velocity = NORMAL.copy();
                 }
+                Vector2d rotate = velocity.rotate(gameCanvas.player.playerMove.angle);
+                gameCanvas.player.playerMove.velocity.set(rotate);
             }
         });
     }

@@ -1,19 +1,17 @@
 import java.awt.*;
 
-public class EnemyAttack {
-    public Vector2d position;
+public class EnemyAttack extends GameObject{
     public Vector2d velocity;
-    private ImageRenderer renderer;
     private EnemyShoot enemyShoot;
 
     public EnemyAttack(){
-        this.position = new Vector2d();
         this.velocity = new Vector2d();
         this.renderer = new ImageRenderer("resources/resources/images/circle.png",30,30);
         this.enemyShoot = new EnemyShoot();
     }
-
+    @Override
     public void run(){
+        super.run();
         this.position.addUp(this.velocity);
         this.enemyShoot.run(this);
         this.enemyShoot.bulletEnemies.forEach(bulletEnemy -> bulletEnemy.run());
