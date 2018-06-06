@@ -16,8 +16,8 @@ public class EnemyShoot {
                 bulletEnemy.position.set(enemy.position);
                 this.bulletEnemies.add(bulletEnemy);
             }
+            this.frameCounter.reset();
         }
-        this.frameCounter.reset();
     }
 
 }
