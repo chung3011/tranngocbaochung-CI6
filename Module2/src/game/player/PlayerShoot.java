@@ -23,8 +23,5 @@ public class PlayerShoot {
             GameObjectManager.instance.add(bulletPlayer);
 
         }
-
-
     }
 }
-

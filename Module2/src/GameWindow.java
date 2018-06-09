@@ -1,9 +1,7 @@
 import input.KeyboardInput;
-
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
 
 public class GameWindow extends JFrame {
 
@@ -16,7 +14,6 @@ public class GameWindow extends JFrame {
         this.event();
         this.setVisible(true);// cho phep cua so window hien thi
     }
-
 
     private void setupGameCanvas(){
         this.gameCanvas = new GameCanvas();

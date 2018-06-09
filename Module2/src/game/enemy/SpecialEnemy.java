@@ -20,7 +20,7 @@ public class SpecialEnemy extends Enemy {
     public SpecialEnemy(){
         this.random = new Random();
         this.velocity = new Vector2D(1,0);
-        this.renderer = new ImageRenderer("resources-rocket/resources/images/circle.png",20,20);
+        this.renderer = new ImageRenderer("resources/images/circle.png",20,20);
         this.boxCollider = new BoxCollider(20,20);
         this.enemyShoot = new game.enemy.EnemyShoot();
     }

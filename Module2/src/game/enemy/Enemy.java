@@ -12,6 +12,7 @@ public class Enemy extends GameObject {
     public BoxCollider boxCollider;
 
 
+    //constructor
     public Enemy(){
         this.velocity = new Vector2D();
         this.renderer = new ImageRenderer("resources/images/circle.png",20,20);
@@ -36,4 +37,3 @@ public class Enemy extends GameObject {
     }
 
 }
-

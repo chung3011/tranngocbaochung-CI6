@@ -54,7 +54,6 @@ public class GameObjectManager {
                 .findFirst().orElse(null);
     }
 
-
     public Stream<GameObject> findObjectAlive(Class className){
         return this.list.stream()
                 .filter(gameObject -> gameObject.isAlive)

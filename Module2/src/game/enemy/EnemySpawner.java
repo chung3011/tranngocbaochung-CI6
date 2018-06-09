@@ -6,7 +6,7 @@ import base.GameObjectManager;
 
 import java.util.Random;
 
-public class EnemySpawner extends GameObject {
+public class EnemySpawner extends GameObject { //tan dung ham run cua base.GameObject
 
     FrameCounter frameCounter ;
     Random random;

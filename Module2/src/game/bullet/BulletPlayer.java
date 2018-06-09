@@ -4,11 +4,9 @@ package game.bullet;
 import base.GameObject;
 import base.GameObjectManager;
 import base.Vector2D;
-import game.enemy.Enemy;
 import physic.BoxCollider;
 import renderer.ImageRenderer;
 
-import java.awt.*;
 
 public class BulletPlayer extends GameObject {
 

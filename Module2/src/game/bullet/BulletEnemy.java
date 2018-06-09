@@ -13,6 +13,7 @@ public class BulletEnemy extends GameObject {
     public BoxCollider boxCollider;
 
 
+    //constructor
     public BulletEnemy(){
         this.velocity = new Vector2D();
         this.renderer = new ImageRenderer("resources/images/circle.png",6,6);

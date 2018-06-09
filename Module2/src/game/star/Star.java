@@ -8,6 +8,7 @@ public class Star extends GameObject {
 
     public Vector2D velocity;
 
+    //constructor
 
     public Star() {
 
