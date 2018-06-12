@@ -11,9 +11,7 @@ public class FrameCounter {
     public boolean run(){
         if(this.count == this.timeInterval){
             return true;
-        }
-        else
-        {
+        } else {
             this.count+=1;
             return false;
         }

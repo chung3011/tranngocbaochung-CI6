@@ -1,7 +1,6 @@
 package renderer;
 
 import base.Vector2D;
-
 import java.awt.*;
 
 public class BackgroundRenderer implements Renderer{

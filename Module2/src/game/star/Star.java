@@ -2,6 +2,7 @@ package game.star;
 
 import base.GameObject;
 import base.Vector2D;
+import base.GameObjectManager;
 import renderer.ImageRenderer;
 
 public class Star extends GameObject {
@@ -20,7 +21,6 @@ public class Star extends GameObject {
     public void run(){
         super.run();
         this.position.addUp(this.velocity);
+        GameObjectManager.instance.killObject(this);
     }
-
-
 }

@@ -9,10 +9,10 @@ public class GameWindow extends JFrame {
     long lastTime =0;
 
     public GameWindow () {
-        this.setSize(1024, 600); // set size window
+        this.setSize(1024, 600);
         this.setupGameCanvas();
         this.event();
-        this.setVisible(true);// cho phep cua so window hien thi
+        this.setVisible(true);
     }
 
     private void setupGameCanvas(){
@@ -28,6 +28,7 @@ public class GameWindow extends JFrame {
     private void keyboardEvent(){
         this.addKeyListener(KeyboardInput.instance);
     }
+
     private void windowEvent(){
         this.addWindowListener(new WindowAdapter() {
             @Override
@@ -37,7 +38,6 @@ public class GameWindow extends JFrame {
         });
     }
 
-
     public void gameLoop(){
         while(true){
             long currentTime = System.nanoTime();
@@ -46,7 +46,6 @@ public class GameWindow extends JFrame {
                 this.gameCanvas.renderAll();
                 this.lastTime = currentTime;
             }
-
         }
     }
 }

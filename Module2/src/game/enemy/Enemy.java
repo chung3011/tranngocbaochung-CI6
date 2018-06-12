@@ -3,23 +3,21 @@ package game.enemy;
 import base.GameObject;
 import base.GameObjectManager;
 import base.Vector2D;
+import game.bullet.BulletPlayer;
 import game.player.Player;
 import physic.BoxCollider;
+import physic.PhysicBody;
 import renderer.ImageRenderer;
 
-public class Enemy extends GameObject {
+public class Enemy extends GameObject implements PhysicBody {
     public Vector2D velocity;
     public BoxCollider boxCollider;
 
-
-    //constructor
     public Enemy(){
         this.velocity = new Vector2D();
         this.renderer = new ImageRenderer("resources/images/circle.png",20,20);
         this.boxCollider = new BoxCollider(20,20);
-
     }
-
     @Override
     public void run(){
         super.run();
@@ -31,9 +29,19 @@ public class Enemy extends GameObject {
                     player.position
                             .subtract(this.position)
                             .normalize()
-                            .multiply(2.0f));
+                            .multiply(1.5f));
         }
-
     }
 
+    @Override
+    public BoxCollider getBoxCollider() {
+        return this.boxCollider;
+    }
+
+    @Override
+    public void getHit(GameObject gameObject) {
+        if(gameObject instanceof Player || gameObject instanceof BulletPlayer){
+            this.isAlive = false;
+        }
+    }
 }

@@ -1,10 +1,13 @@
 package game.enemy;
 
+
 import base.GameObject;
-import base.GameObjectManager;
 import base.Vector2D;
+
+import game.bullet.BulletPlayer;
 import game.player.Player;
 import physic.BoxCollider;
+
 import renderer.ImageRenderer;
 
 import java.util.Random;
@@ -15,8 +18,6 @@ public class SpecialEnemy extends Enemy {
     private Random random;
     private game.enemy.EnemyShoot enemyShoot;
 
-
-    //constructor
     public SpecialEnemy(){
         this.random = new Random();
         this.velocity = new Vector2D(1,0);
@@ -27,7 +28,6 @@ public class SpecialEnemy extends Enemy {
 
     @Override
     public void run(){
-//        super.run();
         this.position.addUp(this.velocity);
         this.enemyShoot.run(this);
         this.boxCollider.position.set(this.position.x-10,this.position.y-10);
@@ -46,6 +46,18 @@ public class SpecialEnemy extends Enemy {
         }
         if (this.position.y < 0) {
             this.position.set(this.random.nextInt(1024), 600);
+        }
+    }
+
+    @Override
+    public BoxCollider getBoxCollider() {
+        return this.boxCollider;
+    }
+
+    @Override
+    public void getHit(GameObject gameObject) {
+        if(gameObject instanceof Player || gameObject instanceof BulletPlayer){
+            this.isAlive = false;
         }
     }
 }
