@@ -11,6 +11,8 @@ import physic.PhysicBody;
 import physic.RunHitObject;
 import renderer.ImageRenderer;
 
+import java.awt.*;
+
 public class BulletPlayer extends GameObject implements PhysicBody {
 
     public Vector2D velocity;
@@ -19,7 +21,7 @@ public class BulletPlayer extends GameObject implements PhysicBody {
 
     public BulletPlayer() {
         this.velocity = new Vector2D();
-        this.renderer = new ImageRenderer("resources/images/circle.png", 4, 4);
+        this.renderer = new ImageRenderer("resources/images/circle.png", 4, 4, Color.BLUE);
         this.boxCollider = new BoxCollider(6, 6);
         this.runHitObject = new RunHitObject(Enemy.class, BulletEnemy.class,SpecialEnemy.class);
     }

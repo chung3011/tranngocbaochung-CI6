@@ -5,11 +5,13 @@ import base.GameObject;
 import base.Vector2D;
 
 import game.bullet.BulletPlayer;
+import game.effect.EffectShield;
 import game.player.Player;
 import physic.BoxCollider;
 
 import renderer.ImageRenderer;
 
+import java.awt.*;
 import java.util.Random;
 
 public class SpecialEnemy extends Enemy {
@@ -21,7 +23,7 @@ public class SpecialEnemy extends Enemy {
     public SpecialEnemy(){
         this.random = new Random();
         this.velocity = new Vector2D(1,0);
-        this.renderer = new ImageRenderer("resources/images/circle.png",20,20);
+        this.renderer = new ImageRenderer("resources/images/circle.png",20,20, Color.GRAY);
         this.boxCollider = new BoxCollider(20,20);
         this.enemyShoot = new game.enemy.EnemyShoot();
     }
@@ -56,7 +58,7 @@ public class SpecialEnemy extends Enemy {
 
     @Override
     public void getHit(GameObject gameObject) {
-        if(gameObject instanceof Player || gameObject instanceof BulletPlayer){
+        if(gameObject instanceof Player || gameObject instanceof BulletPlayer  || gameObject instanceof EffectShield){
             this.isAlive = false;
         }
     }

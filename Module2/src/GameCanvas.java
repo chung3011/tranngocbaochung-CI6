@@ -1,23 +1,27 @@
-import base.GameObject;
 import base.GameObjectManager;
+import game.Particle;
 import game.background.Background;
 import game.effect.EffectSpawner;
 import game.enemy.EnemySpawner;
-import game.enemy.SpecialEnemy;
 import game.enemy.SpecialEnemySpawner;
 import game.player.Player;
 import game.star.StarSpawner;
 import input.KeyboardInput;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+
 public class GameCanvas extends JPanel {
+
 
     BufferedImage backBuffered;
     Graphics graphics;
+
     Player player;
+    Particle particle = new Particle();
 
     private Random random = new Random();
 
@@ -35,10 +39,12 @@ public class GameCanvas extends JPanel {
 
     private void setupCharacter(){
         GameObjectManager.instance.add(new Background());
+
         this.setupPlayer();
         GameObjectManager.instance.add(new StarSpawner());
         GameObjectManager.instance.add(new EnemySpawner());
         GameObjectManager.instance.add(new SpecialEnemySpawner());
+
         GameObjectManager.instance.add(new EffectSpawner());
     }
 
@@ -52,6 +58,7 @@ public class GameCanvas extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         g.drawImage(this.backBuffered,0,0,null);
+
     }
 
     public void renderAll(){
@@ -61,6 +68,9 @@ public class GameCanvas extends JPanel {
 
     public void runAll(){
         GameObjectManager.instance.runAll();
+        this.particle.run(this.player);
         KeyboardInput.instance.reset();
+
     }
+
 }

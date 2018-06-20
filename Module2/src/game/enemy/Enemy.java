@@ -4,10 +4,13 @@ import base.GameObject;
 import base.GameObjectManager;
 import base.Vector2D;
 import game.bullet.BulletPlayer;
+import game.effect.EffectShield;
 import game.player.Player;
 import physic.BoxCollider;
 import physic.PhysicBody;
 import renderer.ImageRenderer;
+
+import java.awt.*;
 
 public class Enemy extends GameObject implements PhysicBody {
     public Vector2D velocity;
@@ -15,7 +18,7 @@ public class Enemy extends GameObject implements PhysicBody {
 
     public Enemy(){
         this.velocity = new Vector2D();
-        this.renderer = new ImageRenderer("resources/images/circle.png",20,20);
+        this.renderer = new ImageRenderer("resources/images/circle.png",20,20, Color.WHITE);
         this.boxCollider = new BoxCollider(20,20);
     }
     @Override
@@ -40,7 +43,7 @@ public class Enemy extends GameObject implements PhysicBody {
 
     @Override
     public void getHit(GameObject gameObject) {
-        if(gameObject instanceof Player || gameObject instanceof BulletPlayer){
+        if(gameObject instanceof Player || gameObject instanceof BulletPlayer || gameObject instanceof EffectShield){
             this.isAlive = false;
         }
     }

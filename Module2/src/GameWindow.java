@@ -1,7 +1,9 @@
 import input.KeyboardInput;
+
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
 
 public class GameWindow extends JFrame {
 
@@ -15,6 +17,7 @@ public class GameWindow extends JFrame {
         this.setVisible(true);
     }
 
+
     private void setupGameCanvas(){
         this.gameCanvas = new GameCanvas();
         this.add(this.gameCanvas);
@@ -27,8 +30,9 @@ public class GameWindow extends JFrame {
 
     private void keyboardEvent(){
         this.addKeyListener(KeyboardInput.instance);
-    }
 
+
+    }
     private void windowEvent(){
         this.addWindowListener(new WindowAdapter() {
             @Override
@@ -38,6 +42,7 @@ public class GameWindow extends JFrame {
         });
     }
 
+
     public void gameLoop(){
         while(true){
             long currentTime = System.nanoTime();
@@ -46,6 +51,7 @@ public class GameWindow extends JFrame {
                 this.gameCanvas.renderAll();
                 this.lastTime = currentTime;
             }
+
         }
     }
 }

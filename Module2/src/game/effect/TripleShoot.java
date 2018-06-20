@@ -7,13 +7,15 @@ import physic.BoxCollider;
 import physic.PhysicBody;
 import renderer.ImageRenderer;
 
+import java.awt.*;
+
 public class TripleShoot extends GameObject implements PhysicBody {
     public BoxCollider boxCollider;
     private FrameCounter frameCounter;
 
     public TripleShoot(){
         this.boxCollider = new BoxCollider(30,30);
-        this.renderer = new ImageRenderer("resources/images/powerup_triple_shot.png", 30,30);
+        this.renderer = new ImageRenderer("resources/images/powerup_triple_shot.png", 30,30,Color.WHITE);
         this.frameCounter = new FrameCounter(400);
 
     }
