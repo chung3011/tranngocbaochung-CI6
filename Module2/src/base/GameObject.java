@@ -33,5 +33,4 @@ public class GameObject {
     public void addAction(Action action){
         this.actions.add(action);
     }
-
 }

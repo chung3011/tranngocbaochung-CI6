@@ -31,8 +31,10 @@ public class KeyboardInput implements KeyListener {
         this.spaceReleased = false;
     }
 
+
     @Override
     public void keyTyped(KeyEvent e) {
+
     }
 
     @Override

@@ -16,10 +16,13 @@ public class BulletEnemy extends GameObject implements PhysicBody {
     public Vector2D velocity;
     public BoxCollider boxCollider;
 
+
+    //constructor
     public BulletEnemy(){
         this.velocity = new Vector2D();
-        this.renderer = new ImageRenderer("resources/images/circle.png",6,6, Color.RED);
+        this.renderer = new ImageRenderer("resources-rocket/resources/images/circle.png",6,6,Color.YELLOW);
         this.boxCollider = new BoxCollider(6,6);
+
     }
 
     @Override
@@ -28,7 +31,9 @@ public class BulletEnemy extends GameObject implements PhysicBody {
         this.position.addUp(this.velocity);
         this.boxCollider.position.set(this.position.x - 3, this.position.y - 3);
         GameObjectManager.instance.killObject(this);
+
     }
+
 
     @Override
     public BoxCollider getBoxCollider() {
@@ -40,5 +45,7 @@ public class BulletEnemy extends GameObject implements PhysicBody {
         if(gameObject instanceof Player || gameObject instanceof BulletPlayer){
             this.isAlive = false;
         }
+
+
     }
 }

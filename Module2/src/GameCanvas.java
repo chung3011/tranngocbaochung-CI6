@@ -1,12 +1,15 @@
 import base.GameObjectManager;
 import game.Particle;
 import game.background.Background;
-import game.effect.EffectSpawner;
+import game.effect.EffectObjectSpawner;
 import game.enemy.EnemySpawner;
 import game.enemy.SpecialEnemySpawner;
 import game.player.Player;
 import game.star.StarSpawner;
 import input.KeyboardInput;
+import input.MouseInput;
+import scene.GamePlayScene;
+import scene.SceneManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,10 +28,12 @@ public class GameCanvas extends JPanel {
 
     private Random random = new Random();
 
+
+
     public GameCanvas()  {
         this.setSize(1024, 600);
-        this.setupCharacter();
         this.setupBackbuffered();
+        SceneManager.instance.changeScene(new GamePlayScene());
         this.setVisible(true);
 
     }
@@ -37,23 +42,27 @@ public class GameCanvas extends JPanel {
         this.graphics = this.backBuffered.getGraphics();
     }
 
-    private void setupCharacter(){
-        GameObjectManager.instance.add(new Background());
+//    private void setupCharacter(){
+//        GameObjectManager.instance.add(new Background());
+//
+//        this.setupPlayer();
+//        GameObjectManager.instance.add(new StarSpawner());
+//        GameObjectManager.instance.add(new EnemySpawner());
+//        GameObjectManager.instance.add(new SpecialEnemySpawner());
+////
+//        GameObjectManager.instance.add(new EffectObjectSpawner());
+//    }
+//
+//
+//
+//    private  void setupPlayer(){
+//        this.player = GameObjectManager.instance.recycle(Player.class);
+//        this.player.position.set(500,300);
+//        this.player.playerMove.velocity.set(4,0);
+//
+//    }
 
-        this.setupPlayer();
-        GameObjectManager.instance.add(new StarSpawner());
-        GameObjectManager.instance.add(new EnemySpawner());
-        GameObjectManager.instance.add(new SpecialEnemySpawner());
 
-        GameObjectManager.instance.add(new EffectSpawner());
-    }
-
-    private  void setupPlayer(){
-        this.player = GameObjectManager.instance.recycle(Player.class);
-        this.player.position.set(500,300);
-        this.player.playerMove.velocity.set(4,0);
-
-    }
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -66,11 +75,18 @@ public class GameCanvas extends JPanel {
         this.repaint();
     }
 
+
     public void runAll(){
         GameObjectManager.instance.runAll();
-        this.particle.run(this.player);
+//        this.particle.run(this.player);
         KeyboardInput.instance.reset();
+        SceneManager.instance.performChangeSceneIfNeeded();
+        MouseInput.instance.reset();
 
     }
+
+
+
+
 
 }

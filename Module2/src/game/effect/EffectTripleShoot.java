@@ -9,13 +9,15 @@ import renderer.ImageRenderer;
 
 import java.awt.*;
 
-public class EffectShield extends GameObject implements PhysicBody {
+public class EffectTripleShoot extends GameObject implements PhysicBody {
     public BoxCollider boxCollider;
     private FrameCounter frameCounter;
-    public EffectShield(){
+
+    public EffectTripleShoot(){
         this.boxCollider = new BoxCollider(30,30);
-        this.renderer =new ImageRenderer("resources-rocket/resources/images/powerup_shield.png",30,30, Color.WHITE);
+        this.renderer = new ImageRenderer("resources-rocket/resources/images/powerup_triple_shot.png", 30,30,Color.WHITE);
         this.frameCounter = new FrameCounter(800);
+
     }
     public void run(){
         this.boxCollider.position.set(this.position.x-15, this.position.y-15);

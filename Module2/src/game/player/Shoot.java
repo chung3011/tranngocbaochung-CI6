@@ -1,5 +1,5 @@
 package game.player;
 
 public interface Shoot {
-    void shoot(Player player);
+     void shoot(Player player);
 }

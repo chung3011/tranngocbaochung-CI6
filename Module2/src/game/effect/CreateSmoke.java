@@ -20,7 +20,7 @@ public class CreateSmoke extends GameObject {
     public void run(Player player) {
         if (this.frameCounter.run()) {
             Smoke smoke = GameObjectManager.instance.recycle(Smoke.class);
-            smoke.renderer = new ImageRenderer("resources/images/circle.png", 10, 10, Color.WHITE);
+            smoke.renderer = new ImageRenderer("resources-rocket/resources/images/circle.png", 10, 10, Color.CYAN);
             smoke.position.set(player.position);
 
             Vector2D rotate = player.playerMove.velocity.add(
@@ -31,3 +31,4 @@ public class CreateSmoke extends GameObject {
         }
     }
 }
+

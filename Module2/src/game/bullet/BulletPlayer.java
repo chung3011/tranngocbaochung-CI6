@@ -1,5 +1,6 @@
 package game.bullet;
 
+
 import base.GameObject;
 import base.GameObjectManager;
 import base.Vector2D;
@@ -19,9 +20,11 @@ public class BulletPlayer extends GameObject implements PhysicBody {
     public BoxCollider boxCollider;
     private RunHitObject runHitObject;
 
+
+
     public BulletPlayer() {
         this.velocity = new Vector2D();
-        this.renderer = new ImageRenderer("resources/images/circle.png", 4, 4, Color.BLUE);
+        this.renderer = new ImageRenderer("resources-rocket/resources/images/circle.png", 4, 4,Color.BLUE);
         this.boxCollider = new BoxCollider(6, 6);
         this.runHitObject = new RunHitObject(Enemy.class, BulletEnemy.class,SpecialEnemy.class);
     }
@@ -33,6 +36,8 @@ public class BulletPlayer extends GameObject implements PhysicBody {
         this.boxCollider.position.set(this.position.x - 3, this.position.y - 3);
         this.runHitObject.run(this);
         GameObjectManager.instance.killObject(this);
+
+
     }
 
     @Override
@@ -45,5 +50,6 @@ public class BulletPlayer extends GameObject implements PhysicBody {
         if(gameObject instanceof Enemy || gameObject instanceof BulletEnemy || gameObject instanceof SpecialEnemy){
             this.isAlive = false;
         }
+
     }
 }

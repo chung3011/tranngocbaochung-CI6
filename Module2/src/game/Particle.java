@@ -27,20 +27,24 @@ public class Particle extends GameObject {
 
     }
     public void run(Player player){
-        if(!player.isAlive && player.hitEnemy && numberParticle <3){
-            for (int angle = 0; angle < 360; angle += 20) {
-                Smoke smoke = GameObjectManager.instance.recycle(Smoke.class);
-                smoke.renderer = new ImageRenderer("resources/images/circle.png", 25, random.nextInt(25), Color.red);
-                smoke.position.set(player.position.x + random.nextInt(3),player.position.y +random.nextInt(3) );
-                smoke.velocity= new Vector2D(random.nextInt(3)+1,random.nextInt(3)+1).rotate(angle);
-            }
-            if(this.frameCounter.run()){
-                numberParticle++;
-                this.frameCounter.reset();
+            if(!player.isAlive && player.hitEnemy && numberParticle <3){
+                System.out.println("hit");
+                for (int angle = 0; angle < 360; angle += 20) {
+                    Smoke smoke = GameObjectManager.instance.recycle(Smoke.class);
+                    smoke.renderer = new ImageRenderer("resources-rocket/resources/images/circle.png", 25, random.nextInt(25), Color.CYAN);
+                    smoke.position.set(player.position.x + random.nextInt(3),player.position.y +random.nextInt(3) );
+                    smoke.velocity= new Vector2D(random.nextInt(3)+1,random.nextInt(3)+1).rotate(angle);
+//                    smoke.velocity = new Vector2D(0, 5).rotate(angle);
+                }
+                if(this.frameCounter.run()){
+                    numberParticle++;
+                    this.frameCounter.reset();
+                }
+
             }
 
-        }
 
     }
+
 
 }

@@ -1,20 +1,22 @@
 package game.enemy;
 
-import action.*;
+import action.ActionAdapter;
+import action.LimitAction;
+import action.SequenceAction;
+import action.WaitAction;
 import base.FrameCounter;
 import base.GameObject;
 import base.GameObjectManager;
 
 import java.util.Random;
 
-public class EnemySpawner extends GameObject {
+public class EnemySpawner extends GameObject { //tan dung ham run cua base.GameObject
 
-//    FrameCounter frameCounter ;
+//    private FrameCounter frameCounter ;
     Random random;
 
     public EnemySpawner(){
         this.random = new Random();
-//        this.frameCounter = new FrameCounter(300);
         this.createAction();
     }
 
@@ -37,13 +39,11 @@ public class EnemySpawner extends GameObject {
 
     }
 
+
     @Override
-    public void run(){
-        super.run();
-//        if(this.frameCounter.run()){
-//            Enemy enemy = GameObjectManager.instance.recycle(Enemy.class);
-//            enemy.position.set(this.random.nextInt(1024),this.random.nextInt(600));
-//            this.frameCounter.reset();
-//        }
+    public  void run(){
+
+            super.run();
+
     }
 }

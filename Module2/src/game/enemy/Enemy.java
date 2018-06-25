@@ -4,7 +4,7 @@ import base.GameObject;
 import base.GameObjectManager;
 import base.Vector2D;
 import game.bullet.BulletPlayer;
-import game.effect.EffectShield;
+import game.effect.Shield;
 import game.player.Player;
 import physic.BoxCollider;
 import physic.PhysicBody;
@@ -16,11 +16,15 @@ public class Enemy extends GameObject implements PhysicBody {
     public Vector2D velocity;
     public BoxCollider boxCollider;
 
+
+    //constructor
     public Enemy(){
         this.velocity = new Vector2D();
-        this.renderer = new ImageRenderer("resources/images/circle.png",20,20, Color.WHITE);
+        this.renderer = new ImageRenderer("resources-rocket/resources/images/circle.png",20,20, Color.YELLOW);
         this.boxCollider = new BoxCollider(20,20);
+
     }
+
     @Override
     public void run(){
         super.run();
@@ -34,6 +38,7 @@ public class Enemy extends GameObject implements PhysicBody {
                             .normalize()
                             .multiply(1.5f));
         }
+
     }
 
     @Override
@@ -43,8 +48,9 @@ public class Enemy extends GameObject implements PhysicBody {
 
     @Override
     public void getHit(GameObject gameObject) {
-        if(gameObject instanceof Player || gameObject instanceof BulletPlayer || gameObject instanceof EffectShield){
+        if(gameObject instanceof Player || gameObject instanceof BulletPlayer|| gameObject instanceof Shield){
             this.isAlive = false;
         }
+
     }
 }

@@ -1,4 +1,5 @@
 import input.KeyboardInput;
+import input.MouseInput;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
@@ -11,10 +12,10 @@ public class GameWindow extends JFrame {
     long lastTime =0;
 
     public GameWindow () {
-        this.setSize(1024, 600);
+        this.setSize(1024, 600); // set size window
         this.setupGameCanvas();
         this.event();
-        this.setVisible(true);
+        this.setVisible(true);// cho phep cua so window hien thi
     }
 
 
@@ -26,6 +27,7 @@ public class GameWindow extends JFrame {
     private void event(){
         this.keyboardEvent();
         this.windowEvent();
+        this.mouseEvent();
     }
 
     private void keyboardEvent(){
@@ -33,6 +35,11 @@ public class GameWindow extends JFrame {
 
 
     }
+
+    private void mouseEvent(){
+        this.addMouseListener(MouseInput.instance);
+    }
+
     private void windowEvent(){
         this.addWindowListener(new WindowAdapter() {
             @Override

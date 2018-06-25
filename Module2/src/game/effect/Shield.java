@@ -51,7 +51,7 @@ public class Shield extends GameObject implements PhysicBody {
     @Override
     public void getHit(GameObject gameObject) {
         if(gameObject instanceof Enemy || gameObject instanceof BulletEnemy || gameObject instanceof SpecialEnemy )
-            this.life--;
+         this.life--;
         if(this.life<=0) {
             this.isAlive = false;
             this.life = 3;
