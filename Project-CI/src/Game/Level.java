@@ -41,34 +41,46 @@ public class Level {
 
     public void addLargeObjects() {
         this.countLargeObjects++;
+        this.sum++;
     }
 
     public void addMediumObjects() {
         this.countMediumObjects++;
+        this.sum++;
     }
 
 
     public void addSmallObjects() {
         this.countSmallObjects++;
+        this.sum++;
+    }
+
+    public void addLeaf() {
+        this.countLeaves++;
+        this.sum++;
     }
 
     public void isCompleted() {
         if (level == 1) {
-            if (countLargeObjects >= Constant.Level.largeLv1 && countMediumObjects >= Constant.Level.mediumLv1 && countSmallObjects >= Constant.Level.smallLv1) {
+//            if (countLargeObjects >= Constant.Level.largeLv1 && countMediumObjects >= Constant.Level.mediumLv1
+//                    && countSmallObjects >= Constant.Level.smallLv1) {
+            if (sum >= 1) {
                 this.isCompleted = true;
                 System.out.println("level up!");
                 this.reset();
                 SceneManager.instance.changeScene(new LevelTwoScene());
             }
 
-            if (sum >= 10) {
+            if (sum >= 7) {
                 this.reset();
                 SceneManager.instance.changeScene(new GameOverScene());
             }
         }
 
         else if (level == 2) {
-            if (countLargeObjects >= Constant.Level.largeLv2 && countMediumObjects >= Constant.Level.mediumLv2 && countSmallObjects >= Constant.Level.smallLv2 ) {
+//            if (countLargeObjects >= Constant.Level.largeLv2 && countMediumObjects >= Constant.Level.mediumLv2 &&
+//                    countSmallObjects >= Constant.Level.smallLv2 ) {
+            if (sum >= 1) {
                 this.isCompleted  = true;
                 System.out.println("YOU WIN!");
                 this.reset();
@@ -88,13 +100,6 @@ public class Level {
                 + this.countSmallObjects + this.countLeaves;
     }
 
-//    public void gameOverReset() {
-//        this.isCompleted = false;
-//        this.countLargeObjects = 0;
-//        this.countMediumObjects = 0;
-//        this.countSmallObjects = 0;
-//        IconGenerator.instance.resetVerticalPos();
-//    }
 
     public int getLevel() {
         return level;
