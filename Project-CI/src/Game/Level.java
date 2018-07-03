@@ -2,8 +2,8 @@ package Game;
 
 import Action.WaitAction;
 import Base.FrameCounter;
-import scene.GamePlayScene;
-import scene.SceneManager;
+import Constant.Constant;
+import scene.*;
 
 public class Level {
 
@@ -13,8 +13,9 @@ public class Level {
     public int countSmallObjects;
     public int countLargeObjects;
     public int countMediumObjects;
+    public int countLeaves;
+    public int sum;
 
-    private FrameCounter frameCounter = new FrameCounter(30);
 
 
     private boolean isCompleted;
@@ -31,6 +32,10 @@ public class Level {
         this.countLargeObjects = 0;
         this.countMediumObjects = 0;
         this.countSmallObjects = 0;
+        this.countLeaves = 0;
+        this.sum = 0;
+        IconGenerator.instance.resetVerticalPos();
+
     }
 
 
@@ -49,27 +54,47 @@ public class Level {
 
     public void isCompleted() {
         if (level == 1) {
-            if (countLargeObjects >= 2 && countMediumObjects >= 2 && countSmallObjects >= 1) {
-//            if (countLargeObjects >= 1 || countSmallObjects >= 1 || countMediumObjects >= 1) {
+            if (countLargeObjects >= Constant.Level.largeLv1 && countMediumObjects >= Constant.Level.mediumLv1 && countSmallObjects >= Constant.Level.smallLv1) {
                 this.isCompleted = true;
-                while(!frameCounter.run()) {
-
-                }
-                frameCounter.reset();
                 System.out.println("level up!");
-                SceneManager.instance.changeScene(new GamePlayScene());
+                this.reset();
+                SceneManager.instance.changeScene(new LevelTwoScene());
+            }
+
+            if (sum >= 10) {
+                this.reset();
+                SceneManager.instance.changeScene(new GameOverScene());
             }
         }
 
         else if (level == 2) {
-            if (countLargeObjects >= 4 && countMediumObjects >= 3 && countSmallObjects >= 3 ) {
+            if (countLargeObjects >= Constant.Level.largeLv2 && countMediumObjects >= Constant.Level.mediumLv2 && countSmallObjects >= Constant.Level.smallLv2 ) {
                 this.isCompleted  = true;
                 System.out.println("YOU WIN!");
-                System.exit(1);
+                this.reset();
+                SceneManager.instance.changeScene(new StartScene());
+            }
+
+            if (sum >= 15) {
+                this.reset();
+                SceneManager.instance.changeScene(new GameOverScene());
             }
         }
 
     }
+
+    public void countObjects() {
+        sum = this.countLargeObjects + this.countMediumObjects
+                + this.countSmallObjects + this.countLeaves;
+    }
+
+//    public void gameOverReset() {
+//        this.isCompleted = false;
+//        this.countLargeObjects = 0;
+//        this.countMediumObjects = 0;
+//        this.countSmallObjects = 0;
+//        IconGenerator.instance.resetVerticalPos();
+//    }
 
     public int getLevel() {
         return level;

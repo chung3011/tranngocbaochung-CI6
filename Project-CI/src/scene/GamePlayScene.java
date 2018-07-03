@@ -2,7 +2,12 @@ package scene;
 
 import Base.GameObjectManager;
 import Game.*;
+import Game.Background.Background;
+import Game.Bomb.BombGenerator;
+import Game.Effect.ShieldEffect;
+import Game.Effect.SpeedEffect;
 import Game.ObjectsToCatch.LargeObject.LargeObjectGenerator;
+import Game.ObjectsToCatch.LeavesGenerator;
 import Game.ObjectsToCatch.MediumObject.MediumObjectGenerator;
 import Game.ObjectsToCatch.SmallObject.SmallObjectGenerator;
 
@@ -17,7 +22,10 @@ public class GamePlayScene implements Scene {
         GameObjectManager.instance.recycle(SmallObjectGenerator.class);
         GameObjectManager.instance.recycle(LargeObjectGenerator.class);
         GameObjectManager.instance.recycle(MediumObjectGenerator.class);
-//        GameObjectManager.instance.add(new BombGenerator());
+        GameObjectManager.instance.recycle(SpeedEffect.class);
+        GameObjectManager.instance.recycle(ShieldEffect.class);
+        GameObjectManager.instance.add(new BombGenerator());
+        GameObjectManager.instance.add(new LeavesGenerator());
     }
 
     @Override
