@@ -5,6 +5,7 @@ import Base.GameObjectManager;
 import Base.Vector2D;
 import Constant.Constant;
 import Game.Bomb.Bomb;
+import Game.Cockcroach.Cockcroach;
 import Game.Effect.ShieldEffect;
 import Game.Effect.SpeedEffect;
 import Game.ObjectsToCatch.LargeObject.LargeObject;
@@ -14,13 +15,16 @@ import Game.ObjectsToCatch.SmallObject.SmallObject;
 import Physic.PhysicBody;
 import Physic.BoxCollider;
 import Physic.RunHitObject;
+import Utils.Utils;
 import scene.GameOverScene;
 import scene.SceneManager;
 
+import javax.sound.sampled.Clip;
+
 public class Anchor extends GameObject implements PhysicBody {
 
-    private final int WIDTH = 20;
-    private final int HEIGHT = 20;
+    private final int WIDTH = 6;
+    private final int HEIGHT = 6;
     private final int STRING_LENGTH = 100;
 
     public float speed;
@@ -42,6 +46,11 @@ public class Anchor extends GameObject implements PhysicBody {
     public BoxCollider boxCollider;
     private RunHitObject runHitObject;
 
+
+    private Clip dropSound;
+    private Clip catchSound;
+    private Clip pullSound;
+
     public Level level;
 
     public Anchor() {
@@ -57,11 +66,18 @@ public class Anchor extends GameObject implements PhysicBody {
                 Bomb.class,
                 ShieldEffect.class,
                 SpeedEffect.class,
-                Leaves.class);
+                Leaves.class,
+                Cockcroach.class);
 
         this.angle = Math.PI / 2;
         this.level = new Level();
         this.speed = 3;
+
+
+        /// load 3 file audio
+        this.dropSound = Utils.loadAudio("resources/audio/button-3-small.wav");
+        this.catchSound = Utils.loadAudio("resources/audio/Cartoon sound effects ping 1.wav");
+        this.pullSound = Utils.loadAudio("resources/audio/pull.wav");
 
     }
 
@@ -76,15 +92,21 @@ public class Anchor extends GameObject implements PhysicBody {
 
 
         if (!isCatching) {
+
+            // kéo về đến player dừng âm thanh kéo (nếu ko bắt được gì)
+            this.pullSound.stop();
+
+
             this.rotateAnchor();
             this.level.isCompleted();
         }
 
         if (isCatching) {
             this.setCatching();
+
         }
 
-        this.boxCollider.position.set( (int) this.position.x - 10, (int) this.position.y - 10 );
+        this.boxCollider.position.set( (int) this.position.x - WIDTH/2, (int) this.position.y - HEIGHT/2 );
     }
 
 
@@ -103,12 +125,21 @@ public class Anchor extends GameObject implements PhysicBody {
     }
 
     private void setCatching() {
+
+
+
         if (ropeDirection.x > Constant.Window.WIDTH - 10 ||
                 ropeDirection.y > Constant.Window.HEIGHT -10 || ropeDirection.x < 0) {
             isDropping = false;
         }
 
         if (isDropping) {
+
+            // bắt đầu thả dây thì bắt đầu âm thanh, count = -1 lặp vô tận đến stop
+            this.dropSound.loop(-1);
+            this.dropSound.start();
+
+
             ropeDirection.addUp(movingDirection);
             runHitObject.run(this);
         }
@@ -116,7 +147,12 @@ public class Anchor extends GameObject implements PhysicBody {
         if (!isDropping) {
             if (ropeDirection.subtract(playerPosition).length() <= 10) {
                 isCatching = false;
+
+                // bắt ko đc kéo về đến player thì stop
+                this.dropSound.stop();
+
                 if (isBomb) {
+                    this.pullSound.stop();
                     System.out.println("GAME OVER");
                     SceneManager.instance.changeScene(new GameOverScene());
                 }
@@ -131,24 +167,49 @@ public class Anchor extends GameObject implements PhysicBody {
     public void getHit(GameObject gameObject) {
         this.isDropping = false;
 
+        //bắt được thì stop âm thanh drop
+        this.dropSound.stop();
+
+        // khởi động âm thanh pull
+        this.pullSound.loop(-1);
+        this.pullSound.start();
+
+
         if (gameObject instanceof LargeObject) {
+
+            // mỗi khi bắt được 1 object thì khơi động âm thanh catch 1 lần (count = 0 là ko lặp)
+            this.catchSound.loop(0);
+            this.catchSound.start();
+
             movingDirection.multiply(1.0f/4.0f);
             level.addLargeObjects();
             GameObjectManager.instance.add(IconGenerator.instance.addLargeObjectIcon());
         }
 
         else if (gameObject instanceof MediumObject) {
+
+            this.catchSound.loop(0);
+            this.catchSound.start();
+
             movingDirection.multiply(1.0f/2.0f);
             level.addMediumObjects();
             GameObjectManager.instance.add(IconGenerator.instance.addMediumObjectIcon());
         }
 
         else if (gameObject instanceof SmallObject) {
+
+            this.catchSound.loop(0);
+            this.catchSound.start();
+
             level.addSmallObjects();
             GameObjectManager.instance.add(IconGenerator.instance.addSmallObjectIcon());
         }
 
         else if (gameObject instanceof Bomb) {
+
+            this.catchSound.loop(0);
+            this.catchSound.start();
+
             if (this.hasShield) {
                 this.hasShield = false;
             }
@@ -158,17 +219,37 @@ public class Anchor extends GameObject implements PhysicBody {
         }
 
         else if (gameObject instanceof ShieldEffect) {
+
+            this.catchSound.loop(0);
+            this.catchSound.start();
+
             this.hasShield = true;
+//            GameObjectManager.instance.add(IconGenerator.instance.addShieldIcon());
         }
 
         else if (gameObject instanceof  SpeedEffect) {
+
+            this.catchSound.loop(0);
+            this.catchSound.start();
+
             this.speed = 8;
+//            GameObjectManager.instance.add(IconGenerator.instance.addSpeedIcon());
         }
 
         else if (gameObject instanceof Leaves) {
+            this.catchSound.loop(0);
+            this.catchSound.start();
+
             this.movingDirection.multiply(1.0f/4.0f);
             level.addLeaf();
             GameObjectManager.instance.add(IconGenerator.instance.addLeaf());
+        }
+
+        else if (gameObject instanceof Cockcroach) {
+            this.catchSound.loop(0);
+            this.catchSound.start();
+            this.isBomb = true;
+
         }
     }
 

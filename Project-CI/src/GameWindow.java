@@ -1,5 +1,6 @@
 import Base.Vector2D;
 import Constant.Constant;
+import Game.Background.GameOverAnNhieu;
 import Game.IconGenerator;
 import Game.Level;
 import scene.*;
@@ -40,6 +41,12 @@ public class GameWindow extends JFrame {
                         gameCanvas.startCatching();
                     }
                     else if (SceneManager.instance.getCurrentScene() instanceof StartScene) {
+                        SceneManager.instance.changeScene(new IntroScene());
+//                        Level.level = 2;
+//                        SceneManager.instance.changeScene(new LevelTwoScene());
+                    }
+
+                    else if (SceneManager.instance.getCurrentScene() instanceof IntroScene) {
                         SceneManager.instance.changeScene(new LevelOneScene());
 //                        Level.level = 2;
 //                        SceneManager.instance.changeScene(new LevelTwoScene());
@@ -49,12 +56,21 @@ public class GameWindow extends JFrame {
                     }
                     else if (SceneManager.instance.getCurrentScene() instanceof LevelTwoScene) {
                         SceneManager.instance.changeScene(new GamePlayScene());
+//                        Level.level = 2;
                     }
-                    else if (SceneManager.instance.getCurrentScene() instanceof GameOverScene) {
+
+                    else if (SceneManager.instance.getCurrentScene() instanceof LevelThreeScene) {
+                        SceneManager.instance.changeScene(new GamePlayScene());
+                    }
+                    else if (SceneManager.instance.getCurrentScene() instanceof GameOverScene ||
+                            SceneManager.instance.getCurrentScene() instanceof WinningScene
+                            || SceneManager.instance.getCurrentScene() instanceof GameOverAnNhieuScene) {
                         Level.level = 0;
                         IconGenerator.instance.resetVerticalPos();
-                        SceneManager.instance.changeScene(new LevelOneScene());
+                        SceneManager.instance.changeScene(new StartScene());
                     }
+
+
                 }
 
             }
